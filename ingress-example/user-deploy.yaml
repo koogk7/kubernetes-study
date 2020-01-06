@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: user-node
+    labels:
+        app: users
+spec:
+    replicas: 1
+    minReadySeconds: 5 # Pod가 배포되고 서비스를 시작하는데 딜레이를 줌
+    selector:
+        matchLabels:
+            app: users
+    template:
+        metadata:
+            name: user-pod
+            labels:
+                app: users
+        spec:
+            containers:
+            - name: users
+              image: koogk7/user-server 
+              imagePullPolicy: Always
+              ports:
+              - containerPort: 8080
+
