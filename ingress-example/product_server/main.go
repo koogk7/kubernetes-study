@@ -18,7 +18,7 @@ func main() {
 
 	// URL 바인딩
 	http.Handle("/", http.HandlerFunc(QR))
-	http.Handle("/stop", http.HandlerFunc(DownServer))
+	http.Handle("/products/stop", http.HandlerFunc(DownServer))
 	log.Println("Products Server is running on portnumber : " + portNumber)
 	//
 	err := http.ListenAndServe(*addr, nil)
