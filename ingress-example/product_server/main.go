@@ -18,6 +18,7 @@ func main() {
 
 	// URL 바인딩
 	http.Handle("/", http.HandlerFunc(QR))
+	http.Handle("/stop", http.HandlerFunc(DownServer))
 	log.Println("Products Server is running on portnumber : " + portNumber)
 	//
 	err := http.ListenAndServe(*addr, nil)
@@ -29,6 +30,10 @@ func main() {
 func QR(w http.ResponseWriter, req *http.Request) {
 	// HTML 템플릿 렌더링
 	_ = temple.Execute(w, req.FormValue("s"))
+}
+
+func DownServer(w http.ResponseWriter, req *http.Request) {
+	log.Fatal("Down Request")
 }
 
 const templateStr = `

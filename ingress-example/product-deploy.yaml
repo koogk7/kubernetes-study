@@ -5,8 +5,8 @@ metadata:
     labels:
         app: products
 spec:
-    replicas: 3
-    minReadySeconds: 5 # Pod가 배포되고 서비스를 시작하는데 딜레이를 줌
+    replicas: 10
+    #minReadySeconds: 5 # Pod가 배포되고 서비스를 시작하는데 딜레이를 줌
     selector:
         matchLabels:
             app: products
@@ -22,4 +22,20 @@ spec:
               imagePullPolicy: Always
               ports:
               - containerPort: 8080
+              livenessProbe:
+                exec:
+                  command:
+                    - cat
+                    - liveness
+                initialDelaySeconds: 5
+                periodSeconds: 5
+              readinessProbe:
+                exec:
+                  command:
+                    - cat
+                    - readiniess
+                initialDelaySeconds: 5
+                periodSeconds: 5
+
+
 
